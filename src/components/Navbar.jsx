@@ -5,7 +5,7 @@ const Navbar = () => {
 
   return (
     <header className={`flex w-full items-center bg-white dark:bg-dark`}>
-      <div className="container">
+      <div className="container max-w-7xl mx-auto py-4">
         <div className="relative -mx-4 flex items-center justify-between">
           <div className="w-60 max-w-full px-4">
             <a href="/#" className="block w-full py-1">
