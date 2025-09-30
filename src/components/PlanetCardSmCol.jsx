@@ -1,11 +1,18 @@
 import PlanetCardSm from "./PlanetCardSm"
 
-const PlanetCardSmCol = () => {
+const PlanetCardSmCol = ({ system }) => {
   return (
     <div className="flex flex-col gap-4">
-      <PlanetCardSm name="Planet 1"/>
-      <PlanetCardSm name="Planet 2"/>
-      <PlanetCardSm name="Planet 3"/>
+      {system.planets.map((planet, index) => (
+        <PlanetCardSm 
+        key={`${planet.name}-${index}`} 
+        name={planet.name} 
+        description={planet.description}
+        size={planet.size}
+        shape={planet.shape}
+        features={planet.features}
+        />
+      ))}
     </div>
   )
 }
