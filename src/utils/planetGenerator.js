@@ -1,6 +1,7 @@
 import { rollDice } from "./diceRoller";
 import { faker } from "@faker-js/faker";
 import * as attributes from "../constants/attributes";
+import { capitalizeFirstLetter } from "./utils";
 
 export const generatePlanet = () => {
   let planetName = attributes.PLANET_NAMES[rollDice(attributes.PLANET_NAMES.length) - 1];
@@ -105,7 +106,7 @@ export const generatePlanet = () => {
   }
 
 return {
-    name: `${planetName.toUpperCase()}`,
+    name: `${capitalizeFirstLetter(planetName)}`,
     size: planetSize,
     shape: planetShape,
     type: planetType,

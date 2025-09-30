@@ -12,7 +12,7 @@ function App() {
       {/* Main content area */}
       <main className="flex-1 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Outlet />
+          <Outlet /> {/* Outlet is used to render the child routes, like a yield */}
         </div>
       </main>
 
