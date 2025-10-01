@@ -8,6 +8,8 @@ export const generatePlanet = (type=null, primary=false) => {
   let planetType = type ? type : rollType();
   let planetSize = rollSize(planetType);
   let planetShape = rollShape(planetType);
+  let description = generateDescription(planetSize, planetShape, planetType);
+  let features = generateFeatures(planetType);
 
   function generateName(type, primary) {
     let name = "";
@@ -15,6 +17,13 @@ export const generatePlanet = (type=null, primary=false) => {
       name = "Empty";
     } else {
       name = attributes.PLANET_NAMES[rollDice(attributes.PLANET_NAMES.length) - 1];
+      if (rollDice(100) <= 7) {
+        name += " " + attributes.PLANET_POSTFIXES[rollDice(attributes.PLANET_POSTFIXES.length) - 1];
+      }  
+      if (rollDice(100) <= 7) {
+        name += " " + rollDice(1000) + String.fromCharCode(65 + Math.floor(Math.random() * 26));
+      }
+        
     }
     return name + (primary ? " (Primary)" : "");
   }
@@ -130,13 +139,74 @@ export const generatePlanet = (type=null, primary=false) => {
     return description;
   }
 
+  function generateFeatures(planetType, ignore110=false) {
+    let features = [];
+    let moons = 0;
+    if (planetType === attributes.PLANET_TYPES.EMPTY || attributes.PORTAL_TYPES.includes(planetType)) {
+      features = "No features";
+    } else {
+      let roll = rollDice(100);
+      if (roll >= 1 && roll <= 10) {
+        if (!ignore110) {
+          moons += 1;
+          generateFeatures(planetType, true).split(", ").forEach(feature => {
+            if (feature && feature !== "No features") {
+              features.push(feature);
+            }
+          });
+        }
+      } else if (roll >= 11 && roll <= 20) {
+        moons += rollDice(4);
+      } else if (roll >= 21 && roll <= 25) {
+        moons += rollDice(4);
+        generateFeatures(planetType, false).split(", ").forEach(feature => {
+          if (feature && feature !== "No features") {
+            features.push(feature);
+          }
+        });
+      } else if (roll >= 26 && roll <= 35) {
+        features.push("Cluster of Asteroids"); 
+      } else if (roll >= 36 && roll <= 45) {
+        features.push("Ring (earth)");
+      } else if (roll >= 46 && roll <= 55) {
+        features.push("Ring (fire)");
+      } else if (roll >= 56 && roll <= 65) {
+        features.push("Ring (water/ice)");
+      } else if (roll >= 66 && roll <= 75) {
+        features.push("Planet hotter than normal");
+      } else if (roll >= 76 && roll <= 85) {
+        features.push("Planet colder than normal");
+      } else if (roll >= 86 && roll <= 95) {
+        features.length = 0;
+        features.push("Vaccuum (Planet has no atmosphere)");
+      } else if (roll >= 96 && roll <= 99) {
+        features.push("Civilization -- world empire");
+      } else if (roll === 100) {
+        let additionalFeatures1 = generateFeatures(planetType, false);
+        let additionalFeatures2 = generateFeatures(planetType, false);
+        if (additionalFeatures1 !== "No features") {
+          features.push(additionalFeatures1);
+        }
+        if (additionalFeatures2 !== "No features") {
+          features.push(additionalFeatures2);
+        }
+      }
+        
+      if (moons > 0) {
+        features.push(`${moons} moons`);
+      }
+
+    }
+    return features.join(", ");
+  }
+
 return {
     name: `${capitalizeFirstLetter(planetName)}`,
     size: planetSize || "",
     shape: planetShape || "",
     type: planetType || "",
-    description: generateDescription(planetSize, planetShape, planetType),
-    features: `${faker.lorem.sentence()}`,
+    description: description || "",
+    features: features || "",
     imageUrl: "https://placehold.co/500x400",
   }
 }

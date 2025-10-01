@@ -7,6 +7,7 @@ import * as attributes from "../constants/attributes";
 export const generateSystem = () => {
   let systemType = rollSystemType();
   let planets = generatePlanets(systemType);
+  let systemName = generateSystemName();
 
 
   function rollSystemType() {
@@ -122,8 +123,25 @@ export const generateSystem = () => {
 
     return planetsArray;
   }
+
+  function generateSystemName() {
+    let name = "";
+    let roll = rollDice(100);
+    if (roll >= 1 && roll <= 3) {
+      name = attributes.RANDOM_WORDS[rollDice(attributes.RANDOM_WORDS.length) - 1];
+    } else if (roll >= 4 && roll <= 30) {
+      name = attributes.FANTASY_RACE_NAMES[rollDice(attributes.FANTASY_RACE_NAMES.length) - 1];
+    } else if (roll >= 31 && roll <= 100) {
+      name = faker.word.noun();
+    }
+    if (name.endsWith('s')) {
+      name = name.slice(0, -1);
+    }
+    return capitalizeFirstLetter(name + "space");
+  }
+
   return {
-    name: `${capitalizeFirstLetter(faker.word.noun())}space`,
+    name: `${systemName}`,
     planets: planets,
   }
 }
