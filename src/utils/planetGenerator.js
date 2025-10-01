@@ -3,11 +3,21 @@ import { faker } from "@faker-js/faker";
 import * as attributes from "../constants/attributes";
 import { capitalizeFirstLetter } from "./utils";
 
-export const generatePlanet = () => {
-  let planetName = attributes.PLANET_NAMES[rollDice(attributes.PLANET_NAMES.length) - 1];
-  let planetType = rollType();
+export const generatePlanet = (type=null, primary=false) => {
+  let planetName = generateName(type, primary);
+  let planetType = type ? type : rollType();
   let planetSize = rollSize(planetType);
-  let planetShape = rollShape();
+  let planetShape = rollShape(planetType);
+
+  function generateName(type, primary) {
+    let name = "";
+    if (type === attributes.PLANET_TYPES.EMPTY) {
+      name = "Empty";
+    } else {
+      name = attributes.PLANET_NAMES[rollDice(attributes.PLANET_NAMES.length) - 1];
+    }
+    return name + (primary ? " (Primary)" : "");
+  }
 
   function rollType() {
     let roll = rollDice(100);
@@ -28,6 +38,9 @@ export const generatePlanet = () => {
   }
 
   function rollSize(planetType) {
+    if (planetType === attributes.PLANET_TYPES.EMPTY) {
+      return null;
+    }
     let roll = rollDice(100);
     
     if (planetType === attributes.PLANET_TYPES.EARTH || planetType === attributes.PLANET_TYPES.WATER) {
@@ -79,7 +92,10 @@ export const generatePlanet = () => {
     }
   }
 
-  function rollShape() {
+  function rollShape(planetType) {
+    if (planetType === attributes.PLANET_TYPES.EMPTY) {
+      return null;
+    }
     let roll = rollDice(100);
     
     if (roll >= 1 && roll <= 5) {
@@ -105,12 +121,21 @@ export const generatePlanet = () => {
     }
   }
 
+  function generateDescription(planetSize, planetShape, planetType) {
+    let description = "";
+    description = `${planetSize || ""} ${planetShape || ""} ${planetType || ""}`;
+    if (!attributes.PORTAL_TYPES.includes(planetType) && planetType !== attributes.PLANET_TYPES.EMPTY) {
+      description += " world";
+    }
+    return description;
+  }
+
 return {
     name: `${capitalizeFirstLetter(planetName)}`,
-    size: planetSize,
-    shape: planetShape,
-    type: planetType,
-    description: `${planetSize} ${planetShape} ${planetType} world`,
+    size: planetSize || "",
+    shape: planetShape || "",
+    type: planetType || "",
+    description: generateDescription(planetSize, planetShape, planetType),
     features: `${faker.lorem.sentence()}`,
     imageUrl: "https://placehold.co/500x400",
   }

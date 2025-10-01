@@ -14,14 +14,14 @@ const PlanetCardSm = ({
   return (
     <button 
       data-index={index} 
-      className="bg-white rounded-lg shadow-md p-4 gap-4 min-w-xs max-w-md flex flex-nowrap cursor-pointer"
+      className="bg-white hover:bg-purple-300 hover:shadow-outline  rounded-lg shadow-md p-4 gap-4 min-w-xs max-w-md flex flex-nowrap cursor-pointer"
       onClick={handleClick}
     >
       <div className="flex-shrink">
         <img src={imageUrl} alt={name} />
       </div>
-      <div className="flex-grow">
-        <h2>{name}</h2>
+      <div className="flex-grow text-left">
+        <h2 className="font-bold">{name}</h2>
         <p>{description}</p>
       </div>
     </button>

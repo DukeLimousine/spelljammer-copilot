@@ -3,8 +3,27 @@ export const PLANET_TYPES = {
   FIRE: "Fire",
   AIR: "Air",
   WATER: "Water",
-  LIVE: "Liveworld"
+  LIVE: "Liveworld",
+  P_O: "Portal to Outer Plane",
+  P_F: "Portal to Plane of Fire",
+  P_E: "Portal to Plane of Earth",
+  P_A: "Portal to Plane of Air",
+  P_W: "Portal to Plane of Water",
+  P_P: "Portal to Postive Energy Plane",
+  P_N: "Portal to Negative Energy Plane",
+  EMPTY: "Empty"
 }
+
+export const PORTAL_TYPES = [
+  'P_O',
+  'P_F',
+  'P_E',
+  'P_A', 
+  'P_W',
+  'P_P',
+  'P_N'
+]
+
 
 export const PLANET_SIZES = {
   FIRE_AND_AIR: {
@@ -65,3 +84,13 @@ export const PLANET_NAMES = [
 "crypso 3",
 "grichi F4HQ",
 ]
+
+export const SYSTEM_TYPES = {
+  STANDARD: "Standard",
+  FIXED: "Fixed",
+  RANDOM: "Random Movement",
+  SEMI_RANDOM: "Semi-Random Movement",
+  SINGLE: "Single Planet",
+  VOID: "Void",
+  NESTED: "Nested Spheres"
+}

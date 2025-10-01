@@ -25,7 +25,7 @@ function Home() {
           <PlanetCardSmCol system={system} onPlanetSelect={updatePlanetCardLg}/>
         </div>
         <div className="flex justify-center content-center flex-2">
-          <PlanetCardLg planet={planet} />
+          <PlanetCardLg planet={planet} empty={!planet} />
         </div>
       </div>
     </div>
