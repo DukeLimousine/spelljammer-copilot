@@ -21,7 +21,7 @@ const PlanetCardSm = ({
         <img src={imageUrl} alt={name} />
       </div>
       <div className="flex-grow text-left">
-        <h2 className="font-bold">{name}</h2>
+        <p className="font-bold">{name}</p>
         <p>{description}</p>
       </div>
     </button>

@@ -18,13 +18,18 @@ function Home() {
   }
   return (
     <div>
-        <button className="button-primary" onClick={refreshSystem}>Generate System</button>
-      <h1>{system.name}</h1>
+      <button className="button-primary" onClick={refreshSystem}>Generate System</button>
+      
+      <div className="flex flex-col flex-wrap gap-4 bg-white rounded-lg shadow-md p-4 mb-8">
+        <h1>{system.name}</h1>
+        <p>{system.description}</p>
+
+      </div>
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-col flex-1">
           <PlanetCardSmCol system={system} onPlanetSelect={updatePlanetCardLg}/>
         </div>
-        <div className="flex justify-center content-center flex-2">
+        <div className="flex justify-end content-center flex-2">
           <PlanetCardLg planet={planet} empty={!planet} />
         </div>
       </div>

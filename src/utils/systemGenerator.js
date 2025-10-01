@@ -8,6 +8,7 @@ export const generateSystem = () => {
   let systemType = rollSystemType();
   let planets = generatePlanets(systemType);
   let systemName = generateSystemName();
+  let systemDescription = generateSystemDescription();
 
 
   function rollSystemType() {
@@ -140,8 +141,13 @@ export const generateSystem = () => {
     return capitalizeFirstLetter(name + "space");
   }
 
+  function generateSystemDescription() {
+    return faker.lorem.sentence();
+  }
+
   return {
     name: `${systemName}`,
     planets: planets,
+    description: systemDescription,
   }
 }
