@@ -5,16 +5,27 @@ import { generateSystem } from "../utils/systemGenerator"
 
 function Home() {
   const [system, setSystem] = useState(() => generateSystem())
+  const [planet, setPlanet] = useState(system.planets[0])
+  // Updates the planet card lg to the planet at the index
+  function updatePlanetCardLg(index) {
+    setPlanet(system.planets[index])
+  }
+  // Generates a new system and sets the planet to the first planet in the system
+  function refreshSystem() {
+    let system = generateSystem()
+    setSystem(system)
+    setPlanet(system.planets[0])
+  }
   return (
     <div>
-      <button className="button-primary" onClick={() => setSystem(generateSystem())}>Generate System</button>
+        <button className="button-primary" onClick={refreshSystem}>Generate System</button>
       <h1>{system.name}</h1>
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-col flex-1">
-          <PlanetCardSmCol system={system}/>
+          <PlanetCardSmCol system={system} onPlanetSelect={updatePlanetCardLg}/>
         </div>
         <div className="flex justify-center content-center flex-2">
-          <PlanetCardLg planet={system.planets[0]} />
+          <PlanetCardLg planet={planet} />
         </div>
       </div>
     </div>

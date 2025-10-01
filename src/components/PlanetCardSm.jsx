@@ -1,10 +1,22 @@
 const PlanetCardSm = ({
   name = "Unknown Planet",
   description = "No description available",
-  imageUrl = "https://placehold.co/50"
+  imageUrl = "https://placehold.co/50",
+  index = 0,
+  onPlanetSelect
 }) => {
+  const handleClick = () => {
+    if (onPlanetSelect) {
+      onPlanetSelect(index);
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 gap-4 min-w-xs max-w-md flex flex-nowrap">
+    <button 
+      data-index={index} 
+      className="bg-white rounded-lg shadow-md p-4 gap-4 min-w-xs max-w-md flex flex-nowrap cursor-pointer"
+      onClick={handleClick}
+    >
       <div className="flex-shrink">
         <img src={imageUrl} alt={name} />
       </div>
@@ -12,7 +24,7 @@ const PlanetCardSm = ({
         <h2>{name}</h2>
         <p>{description}</p>
       </div>
-    </div>
+    </button>
   )
 }
 
