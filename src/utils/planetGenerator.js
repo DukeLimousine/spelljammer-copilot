@@ -193,7 +193,7 @@ export const generatePlanet = (type=null, primary=false) => {
       }
         
       if (moons > 0) {
-        features.push(`${moons} moons`);
+        features.push(`${moons} moon${moons > 1 ? "s" : ""}`);
       }
 
     }

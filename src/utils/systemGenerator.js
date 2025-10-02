@@ -178,12 +178,28 @@ export const generateSystem = () => {
   }
 
   function generateSystemDescription() {
-    return "Planetary Motion: " + planetaryMotion;
+    let description = "";
+    if (planets.length === 0) {
+      description += "This system is a void. ";
+    }
+    let feature = attributes.SYSTEM_FEATURES[rollDice(attributes.SYSTEM_FEATURES.length) - 1];
+    if (feature.includes("<race>")) {
+      let race = attributes.FANTASY_RACE_NAMES[rollDice(attributes.FANTASY_RACE_NAMES.length) - 1];
+      if (race.endsWith('s')) {
+        race = race.slice(0, -1);
+      }
+      description += feature.replace("<race>", race);
+    } else {
+      description += feature;
+    }
+
+    return description;
   }
 
   return {
     name: `${systemName}`,
     planets: planets,
+    motion: planetaryMotion,
     description: systemDescription,
   }
 }

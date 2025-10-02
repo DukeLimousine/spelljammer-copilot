@@ -18,12 +18,14 @@ function Home() {
   }
   return (
     <div>
-      <button className="button-primary" onClick={refreshSystem}>Generate System</button>
+      <div className="flex justify-center mb-4">
+        <button className="button-primary" onClick={refreshSystem}>Generate System</button>
+      </div>
       
       <div className="flex flex-col flex-wrap gap-4 bg-white rounded-lg shadow-md p-4 mb-8">
-        <h1>{system.name}</h1>
-        <p>{system.description}</p>
-
+        <h1 className="text-center">{system.name}</h1>
+        <p><span className="font-semibold">Planetary Motion:</span> {system.motion}</p>
+        <p><span className="font-semibold">Features & Plot Hooks:</span> {system.description}</p>
       </div>
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-col flex-1">

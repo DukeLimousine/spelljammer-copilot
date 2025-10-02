@@ -285,3 +285,12 @@ export const PLANET_POSTFIXES = [
   "Psi",
   "Omega"
 ]
+
+export const SYSTEM_FEATURES = [
+  "A <race> fleet patrols this system.",
+  "The corpse of a dead deity floats through this system.",
+  "The remnants of a huge space battle can be found in this system.",
+  "A herd of Kindori migrate around this system.",
+  "A hidden <race> outpost is located in this system on an asteroid.",
+
+]
