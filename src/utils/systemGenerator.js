@@ -8,6 +8,7 @@ export const generateSystem = () => {
   let systemType = rollSystemType();
   let planets = generatePlanets(systemType);
   let systemName = generateSystemName();
+  let planetaryMotion = generatePlanetaryMotion(planets);
   let systemDescription = generateSystemDescription();
 
 
@@ -141,8 +142,43 @@ export const generateSystem = () => {
     return capitalizeFirstLetter(name + "space");
   }
 
+  function generatePlanetaryMotion(planets) {
+    let motion = "";
+    let roll = rollDice(100);
+    if (planets.length === 0) {
+      return motion;
+    } else if (planets.length === 1) {
+      motion += "Planet has";
+    } else if (planets.length >=2 ) {
+      motion += "Planets have";
+    }
+
+    if (roll >= 1 && roll <= 10) {
+      motion += " no movement -- fixed position.";
+    } else if (roll >= 11 && roll <= 15) {
+      motion += " random movement within the system.";
+    } else if (roll >= 16 && roll <= 50) {
+      motion += " clockwise orbit around the primary or system center.";
+    } else if (roll >= 51 && roll <= 90) {
+      motion += " counter-clockwise orbit around the primary or system center.";
+    } else if (roll >= 91 && roll <= 100) {
+      if (planets.length === 1) {
+        let planetRoll = rollDice(100);
+        if (planetRoll >= 1 && planetRoll <= 75) {
+          motion = "The Primary is stationary in the system center.";
+        } else {
+          motion = "The Primary moves randomly within the system.";
+        }
+      } else if (planets.length >= 2) {
+        motion = "Each planet is either stationary or moves independently in a clockwise or counter-clockwise direction around the primary or system center, or moves randomly within the system.";
+      }
+    }
+    return motion;
+
+  }
+
   function generateSystemDescription() {
-    return faker.lorem.sentence();
+    return "Planetary Motion: " + planetaryMotion;
   }
 
   return {
