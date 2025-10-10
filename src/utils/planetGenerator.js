@@ -1,9 +1,9 @@
 import { rollDice } from "./diceRoller";
 import { faker } from "@faker-js/faker";
 import * as attributes from "../constants/attributes";
-import { capitalizeFirstLetter } from "./utils";
+import { capitalizeFirstLetter, formatDistance } from "./utils";
 
-export const generatePlanet = (type=null, primary=false) => {
+export const generatePlanet = (type=null, primary=false, distance=0) => {
   let planetName = generateName(type, primary);
   let planetType = type ? type : rollType();
   let planetSize = rollSize(planetType);
@@ -208,5 +208,6 @@ return {
     description: description || "",
     features: features || "",
     imageUrl: "https://placehold.co/500x400",
+    distance: formatDistance(distance)
   }
 }

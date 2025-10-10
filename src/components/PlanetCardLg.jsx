@@ -25,7 +25,7 @@ const PlanetCardLg = ({ planet, empty=false }) => {
             <span className="ml-2">{planet.features}</span>
           </div>
           <div>
-            <span className="font-semibold">Distance from Primary:</span>
+            <span className="font-semibold">Avg Distance from Primary:</span>
             <span className="ml-2">{planet.distance}</span>
           </div>
         </div>

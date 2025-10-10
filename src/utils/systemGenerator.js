@@ -3,8 +3,10 @@ import { faker } from "@faker-js/faker";
 import { generatePlanet } from "./planetGenerator";
 import { capitalizeFirstLetter } from "./utils";
 import * as attributes from "../constants/attributes";
+import { formatDistance } from "./utils";
 
 export const generateSystem = () => {
+  let systemDiameter = "";
   let systemType = rollSystemType();
   let planets = generatePlanets(systemType);
   let systemName = generateSystemName();
@@ -70,13 +72,14 @@ export const generateSystem = () => {
   }
 
   function generatePlanets(systemType) {
+    let currentPlanetDistance = 0;
     let planetsArray = [];
     let primary = null;
     let additionalPlanets = 0;
 
     // First, generate the primary unless Void or Nested
     if (![attributes.SYSTEM_TYPES.VOID, attributes.SYSTEM_TYPES.NESTED].includes(systemType)) {
-      primary = generatePlanet(rollPrimaryType(), true);
+      primary = generatePlanet(rollPrimaryType(), true, currentPlanetDistance);
     }
 
     // Next, determine how many additional planets, if any, to generate
@@ -120,9 +123,17 @@ export const generateSystem = () => {
 
     // Push the additional planets to the planet array
     for (let i = 0; i < additionalPlanets; i++) {
-      planetsArray.push(generatePlanet());
-    }
+      // Increment by dice roll times 20 if distance is less than 200, otherwise increment by dice roll times 400
 
+      if (currentPlanetDistance < 200) {
+        currentPlanetDistance += rollDice(6) * 20;
+      } else {
+        currentPlanetDistance += rollDice(4) * 400;
+      }
+      planetsArray.push(generatePlanet(null, false, currentPlanetDistance));
+    }
+    // The diameter of the system is the distance of the last planet from the primary times 4
+    systemDiameter = formatDistance(currentPlanetDistance * 4); 
     return planetsArray;
   }
 
@@ -197,5 +208,6 @@ export const generateSystem = () => {
     planets: planets,
     motion: planetaryMotion,
     description: systemDescription,
+    diameter: systemDiameter
   }
 }
