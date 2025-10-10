@@ -208,6 +208,6 @@ export const generateSystem = () => {
     planets: planets,
     motion: planetaryMotion,
     description: systemDescription,
-    diameter: systemDiameter
+    diameter: systemDiameter === "N/A" ? "40 million miles (0.4 days)" : systemDiameter // Default to 40 million miles (0.4 days) if the system diameter is not set
   }
 }
