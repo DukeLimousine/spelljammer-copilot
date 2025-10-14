@@ -295,7 +295,7 @@ return {
     type: planetType || "",
     description: description || "",
     features: features || "",
-    imageUrl: "https://placehold.co/500x400",
+    imageUrl: "starfield.jpg",
     distance: formatDistance(distance)
   }
 }

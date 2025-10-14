@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+import logoImage from "/src/assets/spelljammercopilotlogo.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className={`flex w-full items-center bg-white dark:bg-dark`}>
+    <header className={`flex w-full items-center bg-black dark:bg-dark`}>
       <div className="container max-w-7xl mx-auto py-4">
         <div className="relative -mx-4 flex items-center justify-between">
           <div className="w-60 max-w-full px-4">
             <a href="/#" className="block w-full py-1">
               <img
-                src="https://cdn.tailgrids.com/assets/images/logo/logo-primary.svg"
+                src={logoImage}
                 alt="logo"
                 className="dark:hidden"
               />

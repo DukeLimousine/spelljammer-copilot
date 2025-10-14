@@ -22,7 +22,7 @@ function Home() {
         <button className="button-primary" onClick={refreshSystem}>Generate System</button>
       </div>
       
-      <div className="flex flex-col flex-wrap gap-4 bg-white rounded-lg shadow-md p-4 mb-8">
+      <div className="flex flex-col flex-wrap gap-4 bg-white rounded-lg shadow-md p-4 mb-8 border border-red">
         <h1 className="text-center">{system.name}</h1>
         <p><span className="font-semibold">Planetary Motion:</span> {system.motion}</p>
         <p><span className="font-semibold">System Diameter:</span> {system.diameter}</p>
