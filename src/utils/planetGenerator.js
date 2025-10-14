@@ -10,6 +10,7 @@ export const generatePlanet = (type=null, primary=false, distance=0) => {
   let planetShape = rollShape(planetType);
   let description = generateDescription(planetSize, planetShape, planetType);
   let features = generateFeatures(planetType);
+  // let features = generateFeaturesTest(planetType, false, 5);
 
   function generateName(type, primary) {
     let name = "";
@@ -196,6 +197,93 @@ export const generatePlanet = (type=null, primary=false, distance=0) => {
         features.push(`${moons} moon${moons > 1 ? "s" : ""}`);
       }
 
+    }
+    // Get all the moons from all potentially recursive feature rolls and total
+    let moonTotal = 0;
+    features.forEach((f, index) => {
+      if (f.includes("moon")) {
+        moonTotal += parseInt(f.split(" ")[0]);
+      }
+    });
+    //loop back through and remove all the moons from the features array
+    features = features.filter(feature => !feature.includes("moon"));
+    // add the total moons to the features array for the final result
+    if (moonTotal > 0) {
+      features.push(`${moonTotal} moon${moonTotal > 1 ? "s" : ""}`);
+    }
+    return features.join(", ");
+  }
+
+  function generateFeaturesTest(planetType, ignore110 = false, setroll) {
+    let features = [];
+    let moons = 0;
+    if (planetType === attributes.PLANET_TYPES.EMPTY || attributes.PORTAL_TYPES.includes(planetType)) {
+      features = "No features";
+    } else {
+      let roll = setroll;
+      if (roll >= 1 && roll <= 10) {
+        if (!ignore110) {
+          moons += 1;
+          generateFeaturesTest(planetType, true, 13).split(", ").forEach(feature => {
+            if (feature && feature !== "No features") {
+              features.push(feature);
+            }
+          });
+        }
+      } else if (roll >= 11 && roll <= 20) {
+        moons += rollDice(4);
+      } else if (roll >= 21 && roll <= 25) {
+        moons += rollDice(4);
+        generateFeaturesTest(planetType, false, 13).split(", ").forEach(feature => {
+          if (feature && feature !== "No features") {
+            features.push(feature);
+          }
+        });
+      } else if (roll >= 26 && roll <= 35) {
+        features.push("Cluster of Asteroids");
+      } else if (roll >= 36 && roll <= 45) {
+        features.push("Ring (earth)");
+      } else if (roll >= 46 && roll <= 55) {
+        features.push("Ring (fire)");
+      } else if (roll >= 56 && roll <= 65) {
+        features.push("Ring (water/ice)");
+      } else if (roll >= 66 && roll <= 75) {
+        features.push("Planet hotter than normal");
+      } else if (roll >= 76 && roll <= 85) {
+        features.push("Planet colder than normal");
+      } else if (roll >= 86 && roll <= 95) {
+        features.length = 0;
+        features.push("Vaccuum (Planet has no atmosphere)");
+      } else if (roll >= 96 && roll <= 99) {
+        features.push("Civilization -- world empire");
+      } else if (roll === 100) {
+        let additionalFeatures1 = generateFeaturesTest(planetType, false, 13);
+        let additionalFeatures2 = generateFeaturesTest(planetType, false, 13);
+        if (additionalFeatures1 !== "No features") {
+          features.push(additionalFeatures1);
+        }
+        if (additionalFeatures2 !== "No features") {
+          features.push(additionalFeatures2);
+        }
+      }
+
+      if (moons > 0) {
+        features.push(`${moons} moon${moons > 1 ? "s" : ""}`);
+      }
+
+    }
+    // Get all the moons from all potentially recursive feature rolls and total
+    let moonTotal = 0;
+    features.forEach((f, index) => {
+      if (f.includes("moon")) {
+        moonTotal += parseInt(f.split(" ")[0]);
+      }
+    });
+    //loop back through and remove all the moons from the features array
+    features = features.filter(feature => !feature.includes("moon"));
+    // add the total moons to the features array for the final result
+    if (moonTotal > 0) {
+      features.push(`${moonTotal} moon${moonTotal > 1 ? "s" : ""}`);
     }
     return features.join(", ");
   }

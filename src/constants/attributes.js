@@ -325,5 +325,6 @@ export const SYSTEM_FEATURES = [
   "The remnants of a huge space battle can be found in this system.",
   "A herd of Kindori migrate around this system.",
   "A hidden <race> outpost is located in this system on an asteroid.",
+  "A crew of <race> pirates scours this system for ships to attack."
 
 ]
