@@ -16,7 +16,7 @@ const PlanetCardSm = ({
   return (
     <button 
       data-index={index} 
-      className="bg-white hover:bg-red hover:shadow-outline  rounded-lg shadow-md p-4 gap-4 min-w-xs max-w-md flex flex-nowrap cursor-pointer"
+      className="bg-white hover:bg-blue hover:shadow-outline hover:text-white  rounded-lg shadow-lg p-4 gap-4 min-w-xs max-w-md flex flex-nowrap cursor-pointer"
       onClick={handleClick}
     >
       <div className="flex-shrink">

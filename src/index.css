@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-white: #f3fefa;
+  /* --color-white: #f3fefa; */
   --color-black: #1a0b04;
   --color-blue: #2198f6;
   --color-red: #c45e36;
   --bg-black: var(--color-black);
   --bg-red: var(--color-red);
+  --bg-blue: var(--color-blue);
 }
 
 /* Global base styles using Tailwind utilities */

@@ -3,7 +3,7 @@ import starfield from "/src/assets/starfield.jpg";
 
 const PlanetCardLg = ({ planet, empty=false }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 min-w-md w-3/4 flex flex-col">
+    <div className="bg-white rounded-lg shadow-lg p-4 min-w-md w-3/4 flex flex-col">
       <div className="w-full mb-4">
         <img src={planet?.imageUrl == "starfield.jpg" ? starfield : planet?.imageUrl || "https://placehold.co/500x400"} alt={planet?.name || "Unknown Planet"} className="w-full rounded-lg" />
       </div>
