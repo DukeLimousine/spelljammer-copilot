@@ -52,54 +52,95 @@ export const generatePlanet = (type=null, primary=false, distance=0) => {
       return null;
     }
     let roll = rollDice(100);
+    let returnValue = "";
     
     if (planetType === attributes.PLANET_TYPES.EARTH || planetType === attributes.PLANET_TYPES.WATER) {
       // Earth and Water types table
+
       if (roll >= 1 && roll <= 5) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.A;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.A;
       } else if (roll >= 6 && roll <= 10) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.B;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.B;
       } else if (roll >= 11 && roll <= 20) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.C;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.C;
       } else if (roll >= 21 && roll <= 40) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.D;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.D;
       } else if (roll >= 41 && roll <= 60) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.E;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.E;
       } else if (roll >= 61 && roll <= 80) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.F;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.F;
       } else if (roll >= 81 && roll <= 90) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.G;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.G;
       } else if (roll >= 91 && roll <= 100) {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.H;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.H;
       } else {
-        return attributes.PLANET_SIZES.EARTH_AND_WATER.F;
+        returnValue = attributes.PLANET_SIZES.EARTH_AND_WATER.F;
       }
     } else {
       // Fire and Air types table
       if (roll >= 1 && roll <= 2) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.A;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.A;
       } else if (roll >= 3 && roll <= 5) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.B;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.B;
       } else if (roll >= 6 && roll <= 10) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.C;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.C;
       } else if (roll >= 11 && roll <= 20) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.D;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.D;
       } else if (roll >= 21 && roll <= 35) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.E;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.E;
       } else if (roll >= 36 && roll <= 50) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.F;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.F;
       } else if (roll >= 51 && roll <= 70) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.G;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.G;
       } else if (roll >= 71 && roll <= 85) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.H;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.H;
       } else if (roll >= 86 && roll <= 95) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.I;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.I;
       } else if (roll >= 96 && roll <= 100) {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.J;
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.J;
       } else {
-        return attributes.PLANET_SIZES.FIRE_AND_AIR.F;
-      }
+        returnValue = attributes.PLANET_SIZES.FIRE_AND_AIR.F;
+      } 
     }
+    let letter = returnValue.split(" ")[1];
+    let diameter = 0;
+    switch (letter) {
+      case "A":
+        diameter = Math.floor(Math.random() * 10) + 1;
+        break;
+      case "B":
+        diameter = Math.floor(Math.random() * 100) + 10;
+        break;
+      case "C":
+        diameter = Math.floor(Math.random() * 1000) + 100;
+        break;
+      case "D":
+        diameter = Math.floor(Math.random() * 3000) + 1000;
+        break;
+      case "E":
+        diameter = Math.floor(Math.random() * 6000) + 4000;
+        break;
+      case "F":
+        diameter = Math.floor(Math.random() * 30000) + 10000;
+        break;
+      case "G":
+        diameter = Math.floor(Math.random() * 60000) + 40000;
+        break;
+      case "H":
+        diameter = Math.floor(Math.random() * 900000) + 100000;
+        break;
+      case "I":
+        diameter = Math.floor(Math.random() * 9000000) + 1000000;
+        break;
+      case "J":
+        diameter = Math.floor(Math.random() * 1000000) + 10000000;
+        break;
+      default:
+        diameter = Math.floor(Math.random() * 10000) + 5000;
+        break;
+    }
+    returnValue = `${returnValue} (${diameter.toLocaleString('en-US')} miles)`;
+    return returnValue;
   }
 
   function rollShape(planetType) {
@@ -133,7 +174,7 @@ export const generatePlanet = (type=null, primary=false, distance=0) => {
 
   function generateDescription(planetSize, planetShape, planetType) {
     let description = "";
-    description = `${planetSize || ""} ${planetShape || ""} ${planetType || ""}`;
+    description = `${planetSize.split(" (")[0] || ""} ${planetShape || ""} ${planetType || ""}`;
     if (!attributes.PORTAL_TYPES.includes(planetType) && planetType !== attributes.PLANET_TYPES.EMPTY) {
       description += " world";
     }

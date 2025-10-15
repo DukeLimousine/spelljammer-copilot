@@ -16,7 +16,7 @@ const PlanetCardLg = ({ planet, empty=false }) => {
             <span className="ml-2">{planet.type}</span>
           </div>
           <div>
-            <span className="font-semibold">Size:</span>
+            <span className="font-semibold">Size (Diameter):</span>
             <span className="ml-2">{planet.size}</span>
           </div>
           <div>
