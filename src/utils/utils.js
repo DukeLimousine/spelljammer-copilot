@@ -12,3 +12,8 @@ export const formatDistance = (distance) => {
         return `${(distance / 1000).toFixed(2)} billion miles (${days} days)`;
     }
 }
+
+export const getBiggestPlanet = (planets) => {
+    let planetSizes = planets.map(planet => Number(planet.size.replaceAll(/\D/g, "")));
+    return Math.max(...planetSizes);
+}

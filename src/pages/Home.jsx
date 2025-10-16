@@ -1,5 +1,6 @@
 import PlanetCardSmCol from "../components/PlanetCardSmCol"
 import PlanetCardLg from "../components/PlanetCardLg"
+import PlanetSizeChart from "../components/PlanetSizeChart"
 import { useState } from "react"
 import { generateSystem } from "../utils/systemGenerator"
 
@@ -35,6 +36,9 @@ function Home() {
         <div className="flex justify-end content-center flex-2">
           <PlanetCardLg planet={planet} empty={!planet} />
         </div>
+      </div>
+      <div className="block bg-white rounded-lg shadow-lg p-4 my-8">
+      <PlanetSizeChart system={system} />
       </div>
     </div>
   )

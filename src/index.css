@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "charts.css/dist/charts.min.css";
 
 @theme {
   /* --color-white: #f3fefa; */
