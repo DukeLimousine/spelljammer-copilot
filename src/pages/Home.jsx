@@ -38,7 +38,7 @@ function Home() {
         </div>
       </div>
       <div className="block bg-white rounded-lg shadow-lg p-4 my-8">
-      <PlanetSizeChart system={system} />
+      <PlanetSizeChart planets={system.planets} />
       </div>
     </div>
   )
