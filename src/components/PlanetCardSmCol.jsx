@@ -2,7 +2,7 @@ import PlanetCardSm from "./PlanetCardSm"
 
 const PlanetCardSmCol = ({ system, onPlanetSelect }) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 lg:items-start items-center">
       {system.planets.map((planet, index) => (
         <PlanetCardSm 
         key={`${planet.name}-${index}`} 

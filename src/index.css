@@ -47,13 +47,13 @@
   }
   
   body {
-    @apply h-full m-0 font-sans antialiased;
+    @apply h-full w-full m-0 font-sans antialiased;
     @apply bg-gray-50 text-gray-900;
     @apply dark:bg-gray-900 dark:text-gray-100;
   }
   
   #root {
-    @apply h-full;
+    @apply h-full w-full;
   }
   
   /* Smooth transitions for theme switching */
